@@ -1,6 +1,6 @@
 # example
 
-An example Kysely project using [kysely-d1](https://github.com/aidenwallis/kysely-d1) and [Cloudflare D1](https://blog.cloudflare.com/introducing-d1/).
+An example Kysely project using [kysely-do](https://github.com/benallfree/kysely-do) and [Cloudflare D1](https://blog.cloudflare.com/introducing-d1/).
 
 ## Setup
 

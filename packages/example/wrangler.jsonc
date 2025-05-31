@@ -1,0 +1,19 @@
+{
+  "name": "kysely-do",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-05-04",
+  "migrations": [
+    {
+      "new_sqlite_classes": ["MyAuthObject"],
+      "tag": "v1",
+    },
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "class_name": "MyAuthObject",
+        "name": "MY_AUTH_OBJECT",
+      },
+    ],
+  },
+}

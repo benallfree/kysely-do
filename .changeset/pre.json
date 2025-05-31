@@ -1,0 +1,9 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "kysely-do-example": "0.0.1",
+    "kysely-do": "0.0.1"
+  },
+  "changesets": []
+}

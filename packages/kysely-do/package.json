@@ -1,0 +1,50 @@
+{
+  "name": "kysely-do",
+  "description": "Kysely dialect for Cloudflare Durable Objects",
+  "module": "./dist/index.js",
+  "version": "0.0.1",
+  "types": "./dist/index.d.ts",
+  "repository": "git@github.com:benallfree/kysely-do.git",
+  "author": {
+    "name": "Ben Allfree",
+    "url": "https://x.com/benallfree"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "kysely",
+    "cloudflare",
+    "d1",
+    "do",
+    "durable",
+    "objects",
+    "durable objects",
+    "workers",
+    "serverless"
+  ],
+  "scripts": {
+    "watch": "tsup --watch",
+    "build": "tsup",
+    "check": "prettier",
+    "format": "prettier -w"
+  },
+  "peerDependencies": {
+    "kysely": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "kysely": "^0.23.3",
+    "tsup": "^8.5.0",
+    "typescript": "^4.8.4",
+    "@types/bun": "latest"
+  }
+}

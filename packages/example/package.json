@@ -1,0 +1,20 @@
+{
+  "name": "kysely-do-example",
+  "version": "0.0.1",
+  "devDependencies": {
+    "better-sqlite3": "^8.0.1",
+    "typescript": "^4.8.4",
+    "wrangler": "^4.18.0"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "types": "wrangler types"
+  },
+  "dependencies": {
+    "hono": "^4.7.10",
+    "kysely": "^0.23.3",
+    "kysely-do": "workspace:*"
+  }
+}

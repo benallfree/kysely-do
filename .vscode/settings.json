@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "wrangler.json": "jsonc"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["*.jsonc"],
+      "schema": {
+        "allowTrailingCommas": true
+      }
+    }
+  ]
+}
