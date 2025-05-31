@@ -3,55 +3,56 @@
 [![ci](https://github.com/benallfree/kysely-do/actions/workflows/ci.yaml/badge.svg)](https://github.com/benallfree/kysely-do/actions/workflows/ci.yaml)
 [![npm](https://img.shields.io/npm/v/kysely-do.svg)](https://www.npmjs.com/package/kysely-do)
 
-[Kysely](https://github.com/koskimas/kysely) adapter for [Cloudflare D1](https://developers.cloudflare.com/d1/).
+[Kysely](https://github.com/koskimas/kysely) adapter for [Cloudflare Durable Objects](https://developers.cloudflare.com/durable-objects/).
 
 ```bash
 npm i kysely-do
 ```
 
-This project was largely adapted from [kysely-do](https://github.com/aidenwallis/kysely-do).
+This project provides a Kysely dialect for Cloudflare Durable Objects, enabling you to use SQL queries with Durable Object storage.
 
 ## Usage
 
-Pass your D1 binding into the dialect in order to configure the Kysely client. Follow [these docs](https://developers.cloudflare.com/d1/get-started/#4-bind-your-worker-to-your-d1-database) for instructions on how to do so.
+### Creating a Durable Object with Kysely
+
+To use kysely-do, you need to create a Durable Object class that initializes a Kysely instance with the `DODialect`. Here's a basic example:
 
 ```typescript
-import { Kysely } from 'kysely';
-import { D1Dialect } from 'kysely-do';
+import { DurableObject } from 'cloudflare:workers'
+import { Kysely } from 'kysely'
+import { DODialect } from 'kysely-do'
 
 export interface Env {
-  DB: D1Database;
+  MY_OBJECT: DurableObjectNamespace<MyObject>
 }
 
-interface KvTable {
-  key: string;
-  value: string;
+export class MyObject extends DurableObject<Env> {
+  private db: Kysely<Database>
+
+  constructor(ctx: DurableObjectState, env: Env) {
+    super(ctx, env)
+
+    // Create Kysely instance with DODialect
+    this.db = new Kysely<Database>({
+      dialect: new DODialect({ ctx }),
+    })
+  }
 }
-
-interface Database {
-  kv: KvTable;
-}
-
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    const { searchParams } = new URL(request.url);
-    const key = searchParams.get('key');
-    if (!key) {
-      return new Response('No key defined.', { status: 400 });
-    }
-
-    // Create Kysely instance with kysely-do
-    const db = new Kysely<Database>({ dialect: new D1Dialect({ database: env.DB }) });
-    
-    // Read row from D1 table
-    const result = await db.selectFrom('kv').selectAll().where('key', '=', key).executeTakeFirst();
-    if (!result) {
-      return new Response('No value found', { status: 404 });
-    }
-
-    return new Response(result.value);
-  },
-};
 ```
 
-There is a working [example](example) also included, which implements a K/V style store using D1.
+### Configuration
+
+You'll need to configure your Durable Object binding in your `wrangler.jsonc`:
+
+```jsonc
+{
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MY_OBJECT",
+        "class_name": "MyObject",
+      },
+    ],
+  },
+}
+```

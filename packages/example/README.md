@@ -1,27 +1,25 @@
 # example
 
-An example Kysely project using [kysely-do](https://github.com/benallfree/kysely-do) and [Cloudflare D1](https://blog.cloudflare.com/introducing-d1/).
+An example Kysely project using [kysely-do](https://github.com/benallfree/kysely-do) and [Cloudflare Durable Objects](https://developers.cloudflare.com/durable-objects/).
 
 ## Setup
 
-**First, create a D1 database:**
+**First, ensure your `wrangler.jsonc` includes the Durable Object binding:**
 
-```bash
-npm run create-db
+```jsonc
+{
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MY_AUTH_OBJECT",
+        "class_name": "MyAuthObject",
+      },
+    ],
+  },
+}
 ```
 
-Take note of the name and UUID of the database.
-
-**Then, update the binding in `wrangler.toml` to use your D1 database.**
-
-```toml
-[[ d1_databases ]]
-binding = "DB" # i.e. available in your Worker on env.DB
-database_name = "kysely-test"
-database_id = "<YOUR ID>"
-```
-
-**Then, run the migration script:**
+**Then, run the setup script:**
 
 ```bash
 npm run setup
