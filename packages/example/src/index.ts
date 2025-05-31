@@ -20,7 +20,9 @@ export class MyAuthObject extends DurableObject<Env> {
     this.db = new Kysely<Database>({
       dialect: new DODialect({ ctx }),
     })
-    this.initializeDatabase()
+    this.ctx.blockConcurrencyWhile(async () => {
+      await this.initializeDatabase()
+    })
   }
 
   private async initializeDatabase() {
