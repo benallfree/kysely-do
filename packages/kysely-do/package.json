@@ -2,7 +2,7 @@
   "name": "kysely-do",
   "description": "Kysely dialect for Cloudflare Durable Objects",
   "module": "./dist/index.js",
-  "version": "0.0.1-rc.0",
+  "version": "0.0.1-rc.1",
   "types": "./dist/index.d.ts",
   "repository": "git@github.com:benallfree/kysely-do.git",
   "author": {

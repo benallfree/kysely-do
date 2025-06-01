@@ -6,6 +6,7 @@
     "kysely-do": "0.0.1"
   },
   "changesets": [
-    "kind-states-find"
+    "kind-states-find",
+    "odd-worms-shine"
   ]
 }
